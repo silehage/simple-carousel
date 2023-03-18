@@ -102,8 +102,6 @@ function Carousel(selector, opts = {}){
         let href = el.getAttribute('href')
         let target = el.getAttribute('_target') || '_self'
 
-        console.log(movementX);
-
         if(!href || movementX != 0) return
 
         window.open(href, target)
