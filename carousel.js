@@ -12,7 +12,8 @@ function Carousel(selector, opts = {}){
         offsetLeft,
         scrollLeft, 
         containerWidth, 
-        columnWidth
+        columnWidth,
+        movementX;
 
     let { 
         gap, 
@@ -39,20 +40,26 @@ function Carousel(selector, opts = {}){
         isDown = true
         startX = e.pageX - offsetLeft;
         scrollLeft = containerEl.scrollLeft;
+        movementX = 0
         containerEl.classList.add('carousel--active');
     }
     function handleMouseLeave(e) {
         isDown = false
+        movementX = 0
         containerEl.classList.remove('carousel--active');
     }
     function handleMouseUp(e) {
         isDown = false
         containerEl.classList.remove('carousel--active');
+        setTimeout(() => movementX = 0, 100)
+        
     }
     function handleMouseMove(e) {
         if(!isDown) return;
 
         e.preventDefault();
+
+        movementX = e.movementX
 
         const pageX = e.pageX - offsetLeft;
         const walk = (pageX - startX) * dragSpeed; //scroll-fast
@@ -80,5 +87,27 @@ function Carousel(selector, opts = {}){
 
         el.style.width = `${columnWidth}px`
 
+        if(el.tagName == 'A') {
+            el.addEventListener('click', function(e) {
+                e.preventDefault()
+                handleLinkClicked(el)
+            })
+        }
+
+
     });
+
+    function handleLinkClicked(el) {
+
+        let href = el.getAttribute('href')
+        let target = el.getAttribute('_target') || '_self'
+
+        console.log(movementX);
+
+        if(!href || movementX != 0) return
+
+        window.open(href, target)
+    }
+
+
 } 
