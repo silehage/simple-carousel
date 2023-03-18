@@ -100,7 +100,7 @@ function Carousel(selector, opts = {}){
     function handleLinkClicked(el) {
 
         let href = el.getAttribute('href')
-        let target = el.getAttribute('_target') || '_self'
+        let target = el.getAttribute('target') || '_self'
 
         if(!href || movementX != 0) return
 
