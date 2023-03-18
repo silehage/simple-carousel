@@ -1,0 +1,28 @@
+/* Carousel Start */
+.carousel__container {
+    position: relative;
+    display: flex;
+    width: 100%;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    transition: all 0.2s;
+    will-change: transform;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
+}
+.carousel__container.carousel--animated {
+    transform: scale(.99);
+}
+.carousel__container.carousel--active.carousel--animated {
+    transform: scale(1);
+}
+
+.carousel__container .carousel__item {
+    flex: none;
+}
+.carousel__container::-webkit-scrollbar {
+    width: 0;
+}
+/* Carousel End */
